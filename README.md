@@ -2,6 +2,7 @@
 This mod provides a easy-to-use dialog API. This mod was extracted from [the game Glitch](https://content.minetest.net/packages/Wuzzy/glitch/), a game in the 2022 Minetest Game Jam. This mod is backward-compactible with the upstream.
 
 On top of the upstream one, this mod did the following changes:
+
 1. `dialog.show_dialogtree` now accepts a optional `speech_id` to specity the staring speech ID.
 2. `options` of [Speech definition tables](#Speech) now can be a function receiving the player object and returns a list of [options](#Option).
 3. Options now align to the bottom. Previously, options align to the top.
