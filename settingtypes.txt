@@ -1,0 +1,4 @@
+# If enabled, an example dialog will be registered.
+# Type /dialog_example to open it.
+# This is always set to true in singleplayer mode regardless of the settings.
+dialog_register_example (Register example dialog) bool false
