@@ -1,0 +1,25 @@
+# textdomain: dialog
+
+### api.lua ###
+Continue=
+Quit=
+
+### example.lua ###
+Player=
+System Helper=
+dialog  Copyright (C) 2022-2023 1F616EMO and Wuzzy @nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions.@n=
+The following option is generated dynamically.=
+Here are three options. Which one do you want to choose?=
+I wanna type something.=
+Tell me some jokes.=
+Summon another dialog tree.=
+None of above. Bye.=
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.=
+Why did the chicken cross the road? To get to the other side. =
+BRUH.=
+Dialog tree 2 summoned.=
+Thanks!=
+What do you want to do next?=
+Back to the menu.=
+Leave.=
+Open a example dialog.=

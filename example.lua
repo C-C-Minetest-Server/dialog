@@ -34,7 +34,7 @@ dialog.register_speaker(SYS, {
 dialog.register_dialogtree("dialog:example", {
 	speeches = {
 		start = {
-			text = S("dialog  Copyright (C) 2022-2023 1F616EMO and Wuzzy \nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions.\n" .. dialog.fork),
+			text = S("dialog  Copyright (C) 2022-2023 1F616EMO and Wuzzy \nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions.\n") .. dialog.fork,
 			speaker = SYS,
 			options = {{ action = "speech", next_speech = "step2" }},
 		},

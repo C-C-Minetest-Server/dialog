@@ -1,0 +1,26 @@
+# textdomain: dialog
+
+### api.lua ###
+Continue=繼續
+Quit=離開
+
+### example.lua ###
+Player=玩家
+System Helper=系統助手
+dialog  Copyright (C) 2022-2023 1F616EMO and Wuzzy @nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions.@n=dialog  版 權 所 有（C）2022-2023 1F616EMO 和 Wuzzy@n本 程 式 從 未 提 供 品 質 擔 保。 這 是 款 自 由 軟 體， 歡 迎 你 在 滿 足 一 定 條 件 後 對 其 再 發 佈。@n
+The following option is generated dynamically.=以 下 選 項 是 動 態 生 成 的。
+Here are three options. Which one do you want to choose?=有 三 個 選 項。 您 想 選 擇 哪 個？
+I wanna type something.=我 想 輸 入 一 些 東 西。
+Tell me some jokes.=我 想 聽 段 子。
+Summon another dialog tree.=召 喚 另 一 個 對 話 樹。
+None of above. Bye.=都 不 選， 再 見。
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.=天地玄黃  宇宙洪荒  日月盈昃  辰宿列張  寒來暑往  秋收冬藏  閏餘成歲  律呂調陽  雲騰致雨  露結爲霜  金生麗水  玉出崑岡
+# Following line: Extract from https://w.wiki/_wF2n, License https://creativecommons.org/licenses/by-sa/3.0/deed.zh_HK
+Why did the chicken cross the road? To get to the other side. =雞 曷 行 路？笑 林， 答 曰「 至 彼 方」。
+BRUH.=真 讓 人 無 語。
+Dialog tree 2 summoned.=對 話 樹 二 號 已 經 生 成。
+Thanks!=萬 分 感 激！
+What do you want to do next?=您 現 在 想 做 什 麼？
+Back to the menu.=回 到 選 單。
+Leave.=離 開。
+Open a example dialog.=打開範例對話。

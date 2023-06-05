@@ -333,7 +333,7 @@ minetest.register_on_leaveplayer(function(player)
 	dialog_state[name] = nil
 end)
 
-if not glitch_dialog then
+if not minetest.global_exists("glitch_dialog") then
 	glitch_dialog = dialog
 else
 	-- Only replace the functions
