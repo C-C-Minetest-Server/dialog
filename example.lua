@@ -49,7 +49,7 @@ dialog.register_dialogtree("dialog:example", {
 			text = S("Here are three options. Which one do you want to choose?"),
 			speaker = HLP,
 			options = {
-				{ action = "speech", next_speech = "step4_opt1", text = S("I wanna speak.") },
+				{ action = "speech", next_speech = "step4_opt1", text = S("I wanna type something.") },
 				{ action = "speech", next_speech = "step4_opt2", text = S("Tell me some jokes.") },
 				{ action = "speech", dialogtree_id = "dialog:example_2", text = S("Summon another dialog tree.") },
 				{ action = "quit", text = S("None of above. Bye.") },
@@ -58,7 +58,13 @@ dialog.register_dialogtree("dialog:example", {
 		step4_opt1 = {
 			text = S("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
 			speaker = PLA,
-			options = {{ action = "speech", next_speech = "step3" }},
+			options = {
+				{ action = "field", default = "DEFAULT", name = "field1" },
+				{ action = "speech", next_speech = "step3" }
+			},
+			on_exit = function(player,field)
+				minetest.chat_send_player(player:get_player_name(), dump(field))
+			end,
 		},
 		step4_opt2 = {
 			text = S("Why did the chicken cross the road? To get to the other side. "),

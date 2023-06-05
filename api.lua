@@ -91,17 +91,37 @@ local show_single_speech = function(player, dialogtree_id, speech_id)
 		dialog_state[name]["dialog_options|" .. dialogtree_id .. "|" .. speech_id] = options
 	end
 	local buttons = ""
-	if (not options) or (options and options[1] and not options[1].text) then
+	if (not options) or (options and options[1] and not options[1].action) then
 		-- Continue button if no options or 1 option with no text
 		buttons = buttons .. "set_focus[dialog_continue]"..
 		"button[0.5,6.5;11,0.7;dialog_continue;"..F(S("Continue")).."]"
 	else
-		local num_options = math.min(#speech.options, MAX_OPTIONS)
-		local y = 3.5 + (4 - num_options) -- New in 1F616EMo: Align all options to the bottom
-		buttons = "set_focus[dialog_1]"
+		local num_options = math.min(#options, MAX_OPTIONS)
+		local y = 3.5 + (4 - num_options) -- New in 1F616EMO: Align all options to the bottom
+		buttons = "set_focus[dialog_" .. tostring(speech.focus or 1) .. "]" -- New in 1F616EMO: Custom default focus
 		for o=1, num_options do
-			buttons = buttons ..
-			"button[0.5,"..y..";11,0.7;dialog_"..o..";"..F(options[o].text).."]"
+			if options[o].action == "speech" or options[o].action == "quit" then
+				local text = options[o].text
+				if not text then
+					if options[o].action == "speech" then
+						text = S("Continue")
+					else
+						text = S("Quit")
+					end
+				end
+				buttons = buttons ..
+				"button[0.5,"..y..";11,0.7;dialog_"..o..";"..F(text).."]"
+			elseif options[o].action == "field" then
+				local fieldname = options[o].name or ("dialog_" .. o)
+				buttons = buttons ..
+				"field[0.5,"..y..";11,0.7;"..fieldname..";;" .. F(options[o].default or "") .. "]"
+				buttons = buttons ..
+				"field_close_on_enter[" .. fieldname .. ";false]"
+			elseif options[o].action == "blank" then
+				-- pass
+			else
+				error("[dialog] Attempt to show invalid option type " .. options[o].action)
+			end
 			y = y + 1
 		end
 	end
@@ -195,7 +215,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					end
 				end
 				show_single_speech(player, dialogtree_id, next_speech)
-			else
+			elseif option.action == "quit" then
 				minetest.close_formspec(name, formname)
 				return true
 			end
@@ -218,11 +238,11 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 		minetest.log("action", "[dialog] Player "..name.." selects 'continue' option (dialogtree="..dialogtree_id..", speech="..speech_id..")")
 		-- Continue button was pressed
 		if speech.on_exit then
-			speech.on_exit(player)
+			speech.on_exit(player,fields)
 		end
 		local quit = do_option_action(options, 1, speech_id)
 		if quit and (not speech.on_exit) and dialogtree.on_exit then
-			dialogtree.on_exit(player)
+			dialogtree.on_exit(player,fields)
 		end
 	elseif fields.quit then
 		-- Force dialogtree to stay open
@@ -230,23 +250,23 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 			show_single_speech(player, dialogtree_id, speech_id)
 		else
 			if speech.on_exit then
-				speech.on_exit(player)
+				speech.on_exit(player,fields)
 			elseif dialogtree.on_exit then
-				dialogtree.on_exit(player)
+				dialogtree.on_exit(player,fields)
 			end
 		end
 		return
 	else
 		-- Dialog option was selected
 		for o=1, MAX_OPTIONS do
-			if fields["dialog_"..o] then
+			if fields["dialog_"..o] and (options[o].action == "speech" or options[o].action == "quit") then
 				minetest.log("action", "[dialog] Player "..name.." selects option "..o.." (dialogtree="..dialogtree_id..", speech="..speech_id..")")
 				if speech.on_exit then
-					speech.on_exit(player)
+					speech.on_exit(player,fields)
 				end
 				local quit = do_option_action(options, o, speech_id)
 				if quit and (not speech.on_exit) and dialogtree.on_exit then
-					dialogtree.on_exit(player)
+					dialogtree.on_exit(player,fields)
 				end
 				return
 			end

@@ -55,14 +55,22 @@ A table containing information of a speech. Keys contain:
     * A table containing a list of [options](#Option).
     * `function(player)`: A function receiving the current player as its parameter, and return a table containing a list of [options](#Option). *New in 1F616EMO fork.*
     * If the dialog tree is number-indexed, this key is optional, and a "Continue" option is automatically generated for the user to go to the next speech.
+* `focus` (Optional): A integer, the default selection of options. Default to 1.
 
 ## Option
 A table containing information of an option. Keys contain:
 
-* `text`: A string, the text to be shown on the button. It should not be formspec-escaped.
+* `text` (Optional): A string, the text to be shown on the button. It should not be formspec-escaped.
+    * Default to "Continue" for speech or "Quit" for quit. *New in 1F616EMO fork*
 * `action`: A string, either one of the following:
     * `"quit"`: The dialog closes. `on_exit` callbacks of the [speech](#Speech) or the [dialog tree](#dialog-tree) are called.
     * `"speech"`: Another speech opens.
+    * `"field"`: A text input. *New in 1F616EMO fork*
+    * `"blank"`: Leaves a empty spacing. *New in 1F616EMO fork*
 * When `action = "speech"`:
-    * `dialogtree_id` (Optional): A string, the dialog tree to be searched for the [speech](#Speech). Default to the current [dialog tree](#dialog-tree).
+    * `dialogtree_id` (Optional): A string, the dialog tree to be searched for the [speech](#Speech). Default to the current [dialog tree](#dialog-tree). *New in 1F616EMO fork*
     * `next_speech`: A string, or a number, of the [speech](#Speech) to be shown.
+* When `action = "field"`: *New in 1F616EMO fork*
+    * `"name"` (Optional): The name of the field. Default to `"dialog_" .. o`, where `o` is the index of the option.
+    * `"default"` (Optional): The default value of the field. Default to empty.
+
